@@ -1,0 +1,55 @@
+﻿<Window
+    x:Class="video04_CommandsPartTwo.MainWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:video04_CommandsPartTwo"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:vm="clr-namespace:video04_CommandsPartTwo.ViewModels"
+    Title="MainWindow"
+    Width="270"
+    Height="450"
+    mc:Ignorable="d">
+    <Window.Resources>
+        <Style TargetType="Button">
+            <Setter Property="Height" Value="40" />
+            <Setter Property="FontWeight" Value="ExtraBold" />
+        </Style>
+    </Window.Resources>
+    <Window.DataContext>
+        <vm:MessageViewModel />
+    </Window.DataContext>
+
+
+    <Grid>
+        <StackPanel Margin="10">
+
+            <TextBlock Text="Message" />
+
+            <ComboBox x:Name="comboMessages" ItemsSource="{Binding Messages}" />
+
+            <Button Command="{Binding MessageCommand}" CommandParameter="{Binding ElementName=comboMessages, Path=SelectedItem}">
+                Message Log
+            </Button>
+
+            <Button Command="{Binding ConsoleCommand}" CommandParameter="{Binding ElementName=comboMessages, Path=SelectedItem}">
+                Console Log
+            </Button>
+
+            <ListView
+                x:Name="listOfMessages"
+                Height="100"
+                Margin="0,20,0,0"
+                ItemsSource="{Binding Messages}" />
+
+            <Button Command="{Binding MessageCommand}" CommandParameter="{Binding ElementName=listOfMessages, Path=SelectedItem}">
+                Message Log
+            </Button>
+
+            <Button Command="{Binding ConsoleCommand}" CommandParameter="{Binding ElementName=listOfMessages, Path=SelectedItem}">
+                Console Log
+            </Button>
+        </StackPanel>
+
+    </Grid>
+</Window>

@@ -1,0 +1,76 @@
+﻿<Window
+    x:Class="video08_IValueContatinerGood.MainWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:converters="clr-namespace:video08_IValueContatinerGood.Converters"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:video08_IValueContatinerGood"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    Title="MainWindow"
+    Width="500"
+    Height="600"
+    mc:Ignorable="d">
+
+    <Window.Resources>
+        <Style TargetType="StackPanel">
+            <Setter Property="Margin" Value="10" />
+        </Style>
+        <converters:BoolToVisibilityConverter x:Key="BoolToVisibility" />
+        <converters:BoolToBrushConverter x:Key="StatusToBrush" />
+        <converters:BoolToStringConverter x:Key="IsSignedUp" />
+    </Window.Resources>
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition />
+            <RowDefinition />
+            <RowDefinition />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition />
+            <ColumnDefinition />
+        </Grid.ColumnDefinitions>
+
+        <!--  Example 1  C# WPF - IValueConverter Part 1 -->
+        <StackPanel>
+            <CheckBox x:Name="visibilityCheck" IsChecked="True">Is Visible</CheckBox>
+        </StackPanel>
+
+        <StackPanel Grid.Column="1">
+            <Button
+                Grid.Column="1"
+                VerticalAlignment="Top"
+                Visibility="{Binding ElementName=visibilityCheck, Path=IsChecked, Converter={StaticResource BoolToVisibility}}">
+                I Am Visible!
+            </Button>
+        </StackPanel>
+
+        <!--  Example 2  C# WPF - IValueConverter Part 2 -->
+        <StackPanel Grid.Row="1">
+            <CheckBox x:Name="statusCheck" IsChecked="True">
+                Is Online
+            </CheckBox>
+        </StackPanel>
+
+        <StackPanel Grid.Row="1" Grid.Column="1">
+            <Label Foreground="{Binding ElementName=statusCheck, Path=IsChecked, Converter={StaticResource StatusToBrush}}">
+                FrogPattle13
+            </Label>
+        </StackPanel>
+
+        <!--  Example 3  C# WPF - IValueConverter Part 2 -->
+        <StackPanel Grid.Row="2">
+            <CheckBox x:Name="signedUpCheck" IsChecked="True">
+                Sign Up For Newsletter
+            </CheckBox>
+        </StackPanel>
+
+        <StackPanel Grid.Row="2" Grid.Column="1">
+            <Label>
+                Signed up for newsletter
+            </Label>
+            <TextBox Text="{Binding ElementName=signedUpCheck, Path=IsChecked, Converter={StaticResource IsSignedUp}}" />
+        </StackPanel>
+
+    </Grid>
+</Window>

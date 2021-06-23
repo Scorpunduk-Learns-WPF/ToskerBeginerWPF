@@ -1,0 +1,71 @@
+﻿<Window
+    x:Class="video05_StylesPartOne.MainWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:video05_StylesPartOne"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    Title="MainWindow"
+    Width="800"
+    Height="450"
+    mc:Ignorable="d">
+    <Window.Resources>
+        <!--  redefine base style of buttons in current window  -->
+        <Style TargetType="Button">
+            <Setter Property="Background" Value="Black" />
+            <Setter Property="Foreground" Value="Blue" />
+        </Style>
+
+        <!--  define specific button style for curren window  -->
+        <Style x:Key="specificStyle" TargetType="Button">
+            <Setter Property="Background" Value="CornflowerBlue" />
+            <Setter Property="Foreground" Value="DarkTurquoise" />
+        </Style>
+
+        <!--  define extended base style  -->
+        <Style
+            x:Key="ExtendedBaseButtonStyle"
+            BasedOn="{StaticResource {x:Type Button}}"
+            TargetType="Button">
+            <Setter Property="FontSize" Value="30" />
+            <Setter Property="Width" Value="300" />
+        </Style>
+
+        <!--  define extended special style  -->
+        <Style
+            x:Key="ExtendedSpecialButtonStyle"
+            BasedOn="{StaticResource specificStyle}"
+            TargetType="Button">
+            <Setter Property="FontStyle" Value="Oblique" />
+            <Setter Property="Margin" Value="10,50,10,0" />
+            <Setter Property="FontSize" Value="50" />
+        </Style>
+
+    </Window.Resources>
+    <Grid>
+        <StackPanel>
+            <Button
+                Width="150"
+                Height="30"
+                Margin="10">
+                Check button style
+            </Button>
+
+            <Button
+                Width="150"
+                Height="30"
+                Style="{StaticResource specificStyle}">
+                Check Specific Button Style
+            </Button>
+
+            <Button Style="{StaticResource ExtendedBaseButtonStyle}">
+                Check Specific Button Style
+            </Button>
+
+            <Button Style="{StaticResource ExtendedSpecialButtonStyle}">
+                WTF is THAT!!!!
+            </Button>
+
+        </StackPanel>
+    </Grid>
+</Window>
